@@ -15,6 +15,10 @@ module.exports.CreateKeyPair = (passphrase) => {
       passphrase: passphrase
     }
   }, (err, publicKey, privateKey) => {
+    if (!fs.existsSync('creds')) {
+      fs.mkdirSync('creds');
+    }
+
     fs.writeFileSync('creds/pub.key', publicKey);
     fs.writeFileSync('creds/priv.key', privateKey);
   });
