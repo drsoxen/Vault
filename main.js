@@ -1,43 +1,16 @@
 // Modules to control application life and create native browser window
-const {
-  app,
-  BrowserWindow
-} = require('electron')
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
-const express = require('express')
-const exapp = express();
-const encryption = require('./encryption.js');
 
-exapp.get('/', (req, res) => {
-  res.sendFile('index.html', {
-    root: __dirname
-  });
-});
-
-// /CreateKeyPair?passphrase=testpass
-exapp.get('/CreateKeyPair', (req, res) => {
-  encryption.CreateKeyPair(req.query.passphrase);
-  res.redirect('/');
-});
-
-// /EncryptTestMessage?passphrase=testpass&message=test%20Message
-exapp.get('/EncryptTestMessage', (req, res) => {
-  res.send(encryption.EncryptTestMessage(req.query.passphrase, req.query.message));
-});
-
-exapp.listen(3000, () => {
-  console.log('Server Started On Port 3000' + '\n');
-});
-
-
-
-function createWindow() {
+function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 400,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
@@ -45,7 +18,7 @@ function createWindow() {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -54,7 +27,7 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow()
 
-  app.on('activate', function() {
+  app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -64,7 +37,7 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
