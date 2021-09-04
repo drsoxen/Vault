@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const fs = require('fs')
 
-let keyPath = '';
+let keyPath = './creds/';
 
 module.exports.CreateKeyPair = (passphrase) => {
 	crypto.generateKeyPair('rsa', {
