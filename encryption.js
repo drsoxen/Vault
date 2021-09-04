@@ -1,28 +1,6 @@
 const crypto = require('crypto')
 const fs = require('fs')
-
-module.exports.CreateKeyPair = (passphrase) => {
-  crypto.generateKeyPair('rsa', {
-    modulusLength: 4096,
-    publicKeyEncoding: {
-      type: 'spki',
-      format: 'pem'
-    },
-    privateKeyEncoding: {
-      type: 'pkcs8',
-      format: 'pem',
-      cipher: 'aes-256-cbc',
-      passphrase: passphrase
-    }
-  }, (err, publicKey, privateKey) => {
-    if (!fs.existsSync('creds')) {
-      fs.mkdirSync('creds');
-    }
-
-    fs.writeFileSync('creds/pub.key', publicKey);
-    fs.writeFileSync('creds/priv.key', privateKey);
-  });
-}
+const keyManager = require('./keyManager.js')
 
 module.exports.EncryptTestMessage = (passphrase, message) => {
 
@@ -32,13 +10,13 @@ module.exports.EncryptTestMessage = (passphrase, message) => {
 
   var buf = Buffer.from(hash + message, 'utf8');
 
-  pubK = fs.readFileSync('creds/pub.key').toString();
+  pubK = fs.readFileSync(keyManager.GetKeyPath() + 'pub.key').toString();
 
   secretData = crypto.publicEncrypt(pubK, buf);
 
   console.log('Encrypted Data: ' + secretData.toString('hex') + '\n');
 
-  privK = fs.readFileSync('creds/priv.key').toString();
+  privK = fs.readFileSync(keyManager.GetKeyPath() + 'priv.key').toString();
 
   decryptedKey = crypto.createPrivateKey({
     key: privK,
