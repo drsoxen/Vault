@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-      <title>Vault</title>
-      <link href="./assets/css/all.css" rel="stylesheet">
-      <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-      <script src="./renderer.js"></script>
-      <script src="./assets/js/bootstrap.min.js"></script>
-   </head>
-   <body>
-      <button class="btn btn-primary" id="CreateKeysBtn"> Create Private Key File</button>
 
-      <button class="btn btn-secondary" id="select-directory"> Select Key Directory</button>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Vault</title>
+    <link href="./assets/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <script src="./renderer.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+</head>
 
-      <button class="btn btn-success" id="EncryptionTestBtn"> Encrypt and decrypt a test message</button>
+<body>
+    <div>
+        <input type="password" id="Passphrase">
+        <button class="btn btn-warning" id="PassphraseSubmitBtn"> Set Passphrase
+            <i class="fas fa-key"></i>
+        </button>
+    </div>
+    <button class="btn btn-secondary" id="select-directory"> Select Key Directory</button>
+    </br>
+    <button class="btn btn-primary" id="CreateKeysBtn"> Create Private Key File</button>
+    </br>
+    <button class="btn btn-success" id="EncryptionTestBtn"> Encrypt and decrypt a test message</button>
+</body>
 
-   </body>
 </html>

@@ -5,20 +5,24 @@
 // selectively enable features needed in the rendering
 // process.
 const {
-	ipcRenderer
+    ipcRenderer
 } = require('electron')
 
 window.onload = function() {
 
-	document.getElementById('CreateKeysBtn').addEventListener('click', (event) => {
-		ipcRenderer.send('CreateKeys')
-	})
+    document.getElementById('PassphraseSubmitBtn').addEventListener('click', (event) => {
+        ipcRenderer.send('passphrase', document.getElementById('Passphrase').value)
+    })
 
-	document.getElementById('EncryptionTestBtn').addEventListener('click', (event) => {
-		ipcRenderer.send('EncryptionTest')
-	})
+    document.getElementById('CreateKeysBtn').addEventListener('click', (event) => {
+        ipcRenderer.send('CreateKeys')
+    })
 
-	document.getElementById('select-directory').addEventListener('click', (event) => {
-		ipcRenderer.send('open-file-dialog')
-	})
+    document.getElementById('EncryptionTestBtn').addEventListener('click', (event) => {
+        ipcRenderer.send('EncryptionTest')
+    })
+
+    document.getElementById('select-directory').addEventListener('click', (event) => {
+        ipcRenderer.send('open-file-dialog')
+    })
 }
