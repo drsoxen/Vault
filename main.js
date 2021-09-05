@@ -6,6 +6,8 @@ const {
   dialog
 } = require('electron')
 const path = require('path')
+const encryption = require('./encryption.js');
+const keyManager = require('./keyManager.js');
 
 function createWindow() {
   // Create the browser window.
@@ -50,10 +52,35 @@ app.on('window-all-closed', function() {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+ipcMain.on('CreateKeys', (event) => {
+  keyManager.CreateKeyPair('password');
+})
+
+ipcMain.on('EncryptionTest', (event) => {
+  let data = encryption.encryptData('Test Message');
+  encryption.decryptData(data);
+})
+
 ipcMain.on('open-file-dialog', (event) => {
   dialog.showOpenDialog({
     properties: ['openDirectory']
-  }).then(result=>{
-    event.sender.send('selected-directory', result.filePaths)
+  }).then(result => {
+    keyManager.SetKeyPath(result.filePaths)
   })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

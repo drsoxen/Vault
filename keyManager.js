@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const fs = require('fs')
 
 let keyPath = './creds/';
+let passphrase = 'password';
 
 module.exports.CreateKeyPair = (passphrase) => {
 	crypto.generateKeyPair('rsa', {
@@ -23,16 +24,34 @@ module.exports.CreateKeyPair = (passphrase) => {
 
 		keyPath = './creds/';
 
-		fs.writeFileSync(keyPath + 'pub.key', publicKey);
 		fs.writeFileSync(keyPath + 'priv.key', privateKey);
 	});
 }
 
-module.exports.SetKeyPath = (value) => {
+module.exports.dectyptPrivateKey = () => {
+
+  privK = fs.readFileSync(getKeyPath() + 'priv.key').toString();
+
+  decryptedKey = crypto.createPrivateKey({
+    key: privK,
+    type: 'pkcs8',
+    format: 'pem',
+    cipher: 'aes-256-cbc',
+    passphrase: passphrase
+  })
+
+  return decryptedKey;
+}
+
+module.exports.createPublicKey = () => {
+  return crypto.createPublicKey(module.exports.dectyptPrivateKey());
+}
+
+setKeyPath = (value) => {
 	keyPath = value + '/';
 	console.log(keyPath)
 }
 
-module.exports.GetKeyPath = () => {
+getKeyPath = () => {
 	return keyPath;
 }

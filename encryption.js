@@ -2,34 +2,27 @@ const crypto = require('crypto')
 const fs = require('fs')
 const keyManager = require('./keyManager.js')
 
-module.exports.EncryptTestMessage = (passphrase, message) => {
+module.exports.encryptData = (data) => {
 
-  console.log('In Message: ' + message + '\n')
+  console.log('In data: ' + data + '\n')
 
   const hash = crypto.createHash('sha256').update(Date.now().toString()).digest('hex');
 
-  var buf = Buffer.from(hash + message, 'utf8');
+  var buf = Buffer.from(hash + data, 'utf8');
 
-  pubK = fs.readFileSync(keyManager.GetKeyPath() + 'pub.key').toString();
+  pubK = keyManager.createPublicKey();
 
   secretData = crypto.publicEncrypt(pubK, buf);
 
   console.log('Encrypted Data: ' + secretData.toString('hex') + '\n');
 
-  privK = fs.readFileSync(keyManager.GetKeyPath() + 'priv.key').toString();
+  return secretData;
 
-  decryptedKey = crypto.createPrivateKey({
-    key: privK,
-    type: 'pkcs8',
-    format: 'pem',
-    cipher: 'aes-256-cbc',
-    passphrase: passphrase
-  })
+}
 
-  origData = crypto.privateDecrypt(decryptedKey, secretData);
-  outMessage = origData.toString('utf8').substring(64);
+module.exports.decryptData = (data) => {
 
-  console.log('Out Message: ' + outMessage);
+  origData = crypto.privateDecrypt(keyManager.dectyptPrivateKey(), data);
 
-  return outMessage;
+  console.log('Out data: ' + origData.toString('utf8').substring(64));
 }
