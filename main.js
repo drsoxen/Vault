@@ -53,7 +53,7 @@ app.on('window-all-closed', function() {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('CreateKeys', (event) => {
-  keyManager.CreateKeyPair('password');
+  keyManager.CreateKeyPair();
 })
 
 ipcMain.on('EncryptionTest', (event) => {
