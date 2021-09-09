@@ -24,5 +24,7 @@ module.exports.decryptData = (data) => {
 
     origData = crypto.privateDecrypt(keyManager.dectyptPrivateKey(), data);
 
-    console.log('Out data: ' + origData.toString('utf8').substring(64));
+    //console.log('Out data: ' + origData.toString('utf8').substring(64));
+
+    return origData.toString('utf8').substring(64)
 }

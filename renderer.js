@@ -26,11 +26,15 @@ window.onload = function() {
         ipcRenderer.send('open-file-dialog')
     })
 
-    document.getElementById('readJson').addEventListener('click', (event) => {
-        ipcRenderer.send('readJson')
+    document.getElementById('ReadPasswordFile').addEventListener('click', (event) => {
+        ipcRenderer.send('ReadPasswordFile')
     })
 
-    document.getElementById('testJson').addEventListener('click', (event) => {
-        ipcRenderer.send('testJson')
+    document.getElementById('CreateEntry').addEventListener('click', (event) => {
+        ipcRenderer.send('CreateEntry')
+    })
+
+    document.getElementById('FindEntry').addEventListener('click', (event) => {
+        ipcRenderer.send('FindEntry')
     })
 }

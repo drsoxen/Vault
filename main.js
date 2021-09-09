@@ -75,33 +75,15 @@ ipcMain.on('open-file-dialog', (event) => {
     })
 })
 
-ipcMain.on('readJson', (event) => {
+ipcMain.on('ReadPasswordFile', (event) => {
     fileManager.ReadPasswordFile();
 })
 
-ipcMain.on('testJson', (event) => {
-    //fileManager.FindEntry('RBC');
-    fileManager.CreateEntry('Facebook','FBUsername','FBPassword');
-    
+ipcMain.on('CreateEntry', (event) => {
+    fileManager.CreateEntry('Facebook', 'FBUsername', 'FBPassword');
+
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ipcMain.on('FindEntry', (event) => {
+    fileManager.FindEntry('Facebook');
+})
