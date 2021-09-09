@@ -1,14 +1,4 @@
 {
     "vaultName": "My Vault",
-    "accounts": [
-    {
-        "name": "RBC",
-        "username": "Test username",
-        "password": "Test password"
-    },
-    {
-        "name": "Facebook",
-        "username": "FBUsername",
-        "password": "FBPassword"
-    }]
+    "accounts": []
 }
