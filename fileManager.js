@@ -10,7 +10,7 @@ module.exports.ReadPasswordFile = () => {
 
 module.exports.CreateEntry = (name, username, password) => {
     let newEntry = {};
-    newEntry.name = name;
+    newEntry.name = encryption.encryptData(name);
     newEntry.username = encryption.encryptData(username);
     newEntry.password = encryption.encryptData(password);
     vault.accounts.push(newEntry);
@@ -20,36 +20,11 @@ module.exports.CreateEntry = (name, username, password) => {
 
 module.exports.FindEntry = (name) => {
     let obj = vault.accounts.find((o, i) => {
-        if (o.name === name) {
-            console.log('username: ' + encryption.decryptData(vault.accounts[i].username))
-            console.log('password: ' + encryption.decryptData(vault.accounts[i].password))
+        if (encryption.decryptData(o.name) === name) {
+            console.log('Name: ' + encryption.decryptData(vault.accounts[i].name))
+            console.log('Username: ' + encryption.decryptData(vault.accounts[i].username))
+            console.log('Password: ' + encryption.decryptData(vault.accounts[i].password))
             return true;
         }
     });
-}
-
-module.exports.WritePasswordFile = () => {
-
-    let user = {
-        name: 'John Doe',
-        emai: 'john.doe@example.com',
-        age: 27,
-        gender: 'Male',
-        profession: 'Software Developer'
-    };
-
-    // convert JSON object to a string
-    const data = JSON.stringify(user);
-
-    // write file to disk
-    fs.writeFile('./user.json', data, 'utf8', (err) => {
-
-        if (err) {
-            console.log(`Error writing file: ${err}`);
-        } else {
-            console.log(`File is written successfully!`);
-        }
-
-    });
-
 }
