@@ -25,4 +25,12 @@ window.onload = function() {
     document.getElementById('select-directory').addEventListener('click', (event) => {
         ipcRenderer.send('open-file-dialog')
     })
+
+    document.getElementById('readJson').addEventListener('click', (event) => {
+        ipcRenderer.send('readJson')
+    })
+
+    document.getElementById('testJson').addEventListener('click', (event) => {
+        ipcRenderer.send('testJson')
+    })
 }

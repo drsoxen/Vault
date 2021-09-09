@@ -8,6 +8,7 @@ const {
 const path = require('path')
 const encryption = require('./encryption.js');
 const keyManager = require('./keyManager.js');
+const fileManager = require('./fileManager.js');
 
 function createWindow() {
     // Create the browser window.
@@ -73,3 +74,34 @@ ipcMain.on('open-file-dialog', (event) => {
         keyManager.SetKeyPath(result.filePaths)
     })
 })
+
+ipcMain.on('readJson', (event) => {
+    fileManager.ReadPasswordFile();
+})
+
+ipcMain.on('testJson', (event) => {
+    //fileManager.FindEntry('RBC');
+    fileManager.CreateEntry('Facebook','FBUsername','FBPassword');
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
