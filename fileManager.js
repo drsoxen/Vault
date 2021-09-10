@@ -1,4 +1,5 @@
 const encryption = require('./encryption.js');
+const buffer = require('buffer')
 const fs = require('fs')
 
 let vault;
@@ -20,10 +21,10 @@ module.exports.CreateEntry = (name, username, password) => {
 
 module.exports.FindEntry = (name) => {
     let obj = vault.accounts.find((o, i) => {
-        if (encryption.decryptData(o.name) === name) {
-            console.log('Name: ' + encryption.decryptData(vault.accounts[i].name))
-            console.log('Username: ' + encryption.decryptData(vault.accounts[i].username))
-            console.log('Password: ' + encryption.decryptData(vault.accounts[i].password))
+        if (encryption.decryptData(Buffer.from(o.name)) === name) {
+            console.log('Name: ' + encryption.decryptData(Buffer.from(vault.accounts[i].name)))
+            console.log('Username: ' + encryption.decryptData(Buffer.from(vault.accounts[i].username)))
+            console.log('Password: ' + encryption.decryptData(Buffer.from(vault.accounts[i].password)))
             return true;
         }
     });
