@@ -30,7 +30,7 @@ module.exports.CreateKeyPair = () => {
 
 module.exports.dectyptPrivateKey = () => {
 
-    privK = fs.readFileSync(getKeyPath() + 'priv.key').toString();
+    const privK = fs.readFileSync(getKeyPath() + 'priv.key').toString();
 
     decryptedKey = crypto.createPrivateKey({
         key: privK,

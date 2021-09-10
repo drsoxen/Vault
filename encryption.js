@@ -8,11 +8,11 @@ module.exports.encryptData = (data) => {
 
     const hash = crypto.createHash('sha256').update(Date.now().toString()).digest('hex');
 
-    var buf = Buffer.from(hash + data, 'utf8');
+    const buf = Buffer.from(hash + data, 'utf8');
 
-    pubK = keyManager.createPublicKey();
+    const pubK = keyManager.createPublicKey();
 
-    secretData = crypto.publicEncrypt(pubK, buf);
+    const secretData = crypto.publicEncrypt(pubK, buf);
 
     console.log('Encrypted Data: ' + secretData.toString('hex') + '\n');
 
@@ -22,7 +22,7 @@ module.exports.encryptData = (data) => {
 
 module.exports.decryptData = (data) => {
 
-    origData = crypto.privateDecrypt(keyManager.dectyptPrivateKey(), data);
+    const origData = crypto.privateDecrypt(keyManager.dectyptPrivateKey(), data);
 
     //console.log('Out data: ' + origData.toString('utf8').substring(64));
 
