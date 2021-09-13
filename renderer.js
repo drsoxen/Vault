@@ -3,8 +3,6 @@ const {
 } = require('electron')
 const fs = require('fs')
 
-let loaded = true;
-
 window.onload = function() {
 
     LandingPage();
@@ -15,11 +13,11 @@ let LandingPage = () => {
     document.getElementById('main-div').innerHTML = fs.readFileSync('landingPage.html')
 
     document.getElementById('Setup').addEventListener('click', (event) => {
-        Setup();
+        SetupPage();
     })
 
     document.getElementById('NewSetup').addEventListener('click', (event) => {
-        NewSetup();
+        NewSetupPage();
     })
 
     document.getElementById('Unlock').addEventListener('click', (event) => {
@@ -30,9 +28,35 @@ let LandingPage = () => {
 let HomePage = () => {
     document.getElementById('main-div').innerHTML = fs.readFileSync('homePage.html')
 
+    document.getElementById('Back').addEventListener('click', (event) => {
+        LandingPage();
+    })
+
 }
 
-let Setup = () => {
+let NewSetupPage = () => {
+    document.getElementById('main-div').innerHTML = fs.readFileSync('newSetupPage.html')
+
+
+    document.getElementById('CreateKeysBtn').addEventListener('click', (event) => {
+        ipcRenderer.send('CreateKeys')
+    })
+
+    document.getElementById('CreateVaultBtn').addEventListener('click', (event) => {
+        ipcRenderer.send('CreateVault')
+    })
+
+    document.getElementById('SetMasterPassword').addEventListener('click', (event) => {
+        MasterPasswordPage(true);
+    })
+
+    document.getElementById('Back').addEventListener('click', (event) => {
+        LandingPage();
+    })
+
+}
+
+let SetupPage = () => {
     document.getElementById('main-div').innerHTML = fs.readFileSync('setupPage.html')
 
 
@@ -44,15 +68,37 @@ let Setup = () => {
         ipcRenderer.send('open-file-dialog-vault')
     })
 
+    document.getElementById('SetMasterPassword').addEventListener('click', (event) => {
+        MasterPasswordPage(false);
+    })
+
+    document.getElementById('Back').addEventListener('click', (event) => {
+        LandingPage();
+    })
+
+}
+
+let MasterPasswordPage = (create) => {
+    if (create) {
+        //document.getElementById('title')
+    } else {
+
+    }
+
     document.getElementById('PassphraseSubmitBtn').addEventListener('click', (event) => {
         ipcRenderer.send('passphrase', document.getElementById('Passphrase').value)
     })
+
+    document.getElementById('Back').addEventListener('click', (event) => {
+        if (create) {
+            NewSetupPage();
+        } else {
+            SetupPage();
+        }
+    })
+
 }
 
-let NewSetup = () => {
-    document.getElementById('main-div').innerHTML = fs.readFileSync('NewSetupPage.html')
-
-}
 
 
 
