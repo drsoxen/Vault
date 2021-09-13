@@ -10,7 +10,7 @@ window.onload = function() {
 
 let LandingPage = () => {
 
-    document.getElementById('main-div').innerHTML = fs.readFileSync('landingPage.html')
+    document.getElementById('main-div').innerHTML = fs.readFileSync('./views/landingPage.html')
 
     document.getElementById('Setup').addEventListener('click', (event) => {
         SetupPage();
@@ -26,7 +26,7 @@ let LandingPage = () => {
 }
 
 let HomePage = () => {
-    document.getElementById('main-div').innerHTML = fs.readFileSync('homePage.html')
+    document.getElementById('main-div').innerHTML = fs.readFileSync('./views/homePage.html')
 
     document.getElementById('Back').addEventListener('click', (event) => {
         LandingPage();
@@ -35,7 +35,7 @@ let HomePage = () => {
 }
 
 let NewSetupPage = () => {
-    document.getElementById('main-div').innerHTML = fs.readFileSync('newSetupPage.html')
+    document.getElementById('main-div').innerHTML = fs.readFileSync('./views/newSetupPage.html')
 
 
     document.getElementById('CreateKeysBtn').addEventListener('click', (event) => {
@@ -57,7 +57,7 @@ let NewSetupPage = () => {
 }
 
 let SetupPage = () => {
-    document.getElementById('main-div').innerHTML = fs.readFileSync('setupPage.html')
+    document.getElementById('main-div').innerHTML = fs.readFileSync('./views/setupPage.html')
 
 
     document.getElementById('select-directory-key').addEventListener('click', (event) => {
@@ -79,7 +79,7 @@ let SetupPage = () => {
 }
 
 let MasterPasswordPage = (create) => {
-    document.getElementById('main-div').innerHTML = fs.readFileSync('masterPasswordPage.html')
+    document.getElementById('main-div').innerHTML = fs.readFileSync('./views/masterPasswordPage.html')
 
     if (create) {
         document.getElementById('Title').innerHTML = "Create Master Password";
@@ -98,7 +98,6 @@ let MasterPasswordPage = (create) => {
             SetupPage();
         }
     })
-
 }
 
 
