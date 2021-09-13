@@ -53,11 +53,17 @@ ipcMain.on('EncryptionTest', (event) => {
     encryption.decryptData(data);
 })
 
-ipcMain.on('open-file-dialog', (event) => {
+ipcMain.on('open-file-dialog-key', (event) => {
     dialog.showOpenDialog({
-        properties: ['openDirectory']
     }).then(result => {
-        keyManager.SetKeyPath(result.filePaths)
+        keyManager.setKeyPath(result.filePaths)
+    })
+})
+
+ipcMain.on('open-file-dialog-vault', (event) => {
+    dialog.showOpenDialog({
+    }).then(result => {
+        fileManager.setVaultPath(result.filePaths)
     })
 })
 
@@ -72,4 +78,8 @@ ipcMain.on('CreateEntry', (event) => {
 
 ipcMain.on('FindEntry', (event) => {
     fileManager.FindEntry('Facebook');
+})
+
+ipcMain.on('test', (event) => {
+    
 })
