@@ -79,10 +79,12 @@ let SetupPage = () => {
 }
 
 let MasterPasswordPage = (create) => {
-    if (create) {
-        //document.getElementById('title')
-    } else {
+    document.getElementById('main-div').innerHTML = fs.readFileSync('masterPasswordPage.html')
 
+    if (create) {
+        document.getElementById('Title').innerHTML = "Create Master Password";
+    } else {
+        document.getElementById('Title').innerHTML = "Enter Master Password";
     }
 
     document.getElementById('PassphraseSubmitBtn').addEventListener('click', (event) => {
