@@ -3,9 +3,10 @@ const buffer = require('buffer')
 const fs = require('fs')
 
 let vault;
+let vaultPath = './vault.json';
 
 module.exports.ReadPasswordFile = () => {
-    vault = JSON.parse(fs.readFileSync('./vault.json', 'utf-8'))
+    vault = JSON.parse(fs.readFileSync(getVaultPath(), 'utf-8'))
     console.log(JSON.stringify(vault))
 }
 
@@ -28,4 +29,13 @@ module.exports.FindEntry = (name) => {
             return true;
         }
     });
+}
+
+module.exports.setVaultPath = (value) => {
+    vaultPath = value;
+    console.log(vaultPath)
+}
+
+getVaultPath = () => {
+    return vaultPath;
 }
